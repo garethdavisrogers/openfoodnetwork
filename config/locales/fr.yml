@@ -1449,6 +1449,8 @@ fr:
         visible: Visible?
         owner: Gestionnaire principal
         producer: Producteur
+        sells_options:
+          none: aucun
       change_type_form:
         producer_profile: Profil simple
         connect_ofn: Pour apparaître sur la carte et la liste des producteurs
@@ -3321,6 +3323,7 @@ fr:
   product_importer_products_save_error: n'a pu sauvegarder aucun produit :-(
   product_import_file_not_found_notice: 'Fichier non trouvé ou impossible à ouvrir'
   product_import_no_data_in_spreadsheet_notice: 'Aucune donnée trouvée dans le tableau'
+  product_import_inventory_disable: L'importation vers les catalogues boutique n'est pas disponible
   order_choosing_hub_notice: Votre boutique a été sélectionnée.
   order_cycle_selecting_notice: Votre cycle de vente a été sélectionné.
   adjustments_tax_rate_error: "^Veuillez vérifier la TVA applicable pour cet ajustement."
@@ -4631,6 +4634,7 @@ fr:
           terms_of_service: "Conditions Générales d'Utilisation et de Vente"
         sortable_header:
           name: "Produit/Variante"
+          on_hand: "En stock"
           number: "N° commande"
           completed_at: "Date"
           state: "Statut"

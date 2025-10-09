@@ -1447,6 +1447,11 @@ en_FR:
         visible: Visible?
         owner: Owner
         producer: Producer
+        sells_options:
+          unspecified: unspecified
+          none: none
+          own: own
+          any: any
       change_type_form:
         producer_profile: Producer Profile
         connect_ofn: Connect through OFN
@@ -3315,6 +3320,7 @@ en_FR:
   product_importer_products_save_error: did not save any products successfully
   product_import_file_not_found_notice: 'File not found or could not be opened'
   product_import_no_data_in_spreadsheet_notice: 'No data found in spreadsheet'
+  product_import_inventory_disable: Importing into inventories is not available
   order_choosing_hub_notice: Your hub has been selected.
   order_cycle_selecting_notice: Your order cycle has been selected.
   adjustments_tax_rate_error: "^Please check that the tax rate for this adjustment is correct."
@@ -4563,6 +4569,7 @@ en_FR:
           terms_of_service: "Terms of Service"
         sortable_header:
           name: "Name"
+          on_hand: "On Hand"
           number: "Number"
           completed_at: "Completed At"
           state: "State"

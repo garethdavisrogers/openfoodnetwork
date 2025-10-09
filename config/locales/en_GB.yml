@@ -1447,6 +1447,8 @@ en_GB:
         visible: Visible?
         owner: Owner
         producer: Producer
+        sells_options:
+          none: none
       change_type_form:
         producer_profile: Producer Profile
         connect_ofn: Connect through OFN
@@ -2622,7 +2624,7 @@ en_GB:
   sell_ask_services: "Ask us about OFN services."
   shops_title: Shops
   shops_headline: Transform your shopping.
-  shops_text: Food grows in cycles, farmers harvest in cycles, and we order food in cycles. If you find an order cycle closed, check back soon.
+  shops_text: Food grows in cycles, farmers harvest in cycles, and we order food in cycles. If you find an order cycle closed, please check back soon.
   shops_signup_title: Sign up as a hub
   shops_signup_headline: Food hubs, unlimited.
   shops_signup_motivation: Whatever your model, we support you. However you change, we're with you. We're non-profit, independent, and open-sourced. We're the software partners you've dreamed of.
@@ -2842,7 +2844,7 @@ en_GB:
         enterprise_final_step: "Final step!"
         enterprise_social_text: "How can people find %{enterprise} online?"
         website: "Website"
-        website_placeholder: "eg. openfoodnetwork.org.au"
+        website_placeholder: "eg. openfoodnetwork.org.uk"
         facebook: "Facebook"
         facebook_placeholder: "eg. www.facebook.com/PageNameHere"
         linkedin: "LinkedIn"
@@ -4569,6 +4571,7 @@ en_GB:
           terms_of_service: "Terms of Service"
         sortable_header:
           name: "Name"
+          on_hand: "In Stock"
           number: "Number"
           completed_at: "Completed At"
           state: "State"

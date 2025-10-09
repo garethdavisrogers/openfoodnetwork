@@ -20,6 +20,10 @@ gem 'ransack', '~> 4.1.0'
 gem 'responders'
 gem 'webpacker', '~> 5'
 
+# Indirect dependency but we access it directly in JS specs.
+# It turns out to be hard to upgrade but please do if you can.
+gem 'sprockets', '~> 3.7'
+
 gem 'i18n'
 gem 'i18n-js', '~> 3.9.0'
 gem 'rails-i18n'
@@ -152,6 +156,7 @@ end
 group :test, :development do
   gem 'bullet'
   gem 'capybara'
+  gem 'capybara-shadowdom'
   gem 'cuprite'
   gem 'database_cleaner', require: false
   gem 'debug', '>= 1.0.0'
@@ -166,14 +171,13 @@ group :test, :development do
   gem 'rswag'
   gem 'shoulda-matchers'
   gem 'stimulus_reflex_testing', github: "podia/stimulus_reflex_testing", branch: :main
-  gem 'timecop'
 end
 
 group :test do
   gem 'pdf-reader'
+  gem 'puffing-billy'
   gem 'rails-controller-testing'
   gem 'simplecov', require: false
-  gem 'simplecov-lcov', require: false
   gem 'undercover', require: false
   gem 'vcr', require: false
   gem 'webmock', require: false

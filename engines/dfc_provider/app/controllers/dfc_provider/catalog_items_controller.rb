@@ -7,16 +7,14 @@ module DfcProvider
     before_action :check_enterprise
 
     def index
-      person = PersonBuilder.person(current_user)
+      require_permission "ReadProducts"
 
       enterprises = current_user.enterprises.map do |enterprise|
         EnterpriseBuilder.enterprise(enterprise)
       end
-      person.affiliatedOrganizations = enterprises
       catalog_items = enterprises.flat_map(&:catalogItems)
 
       render json: DfcIo.export(
-        person,
         *enterprises,
         *catalog_items,
         *catalog_items.map(&:product),

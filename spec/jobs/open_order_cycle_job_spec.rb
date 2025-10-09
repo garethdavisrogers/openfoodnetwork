@@ -7,8 +7,8 @@ RSpec.describe OpenOrderCycleJob do
   let(:order_cycle) { create(:simple_order_cycle, orders_open_at: now) }
   subject { OpenOrderCycleJob.perform_now(order_cycle.id) }
 
-  around do |example|
-    Timecop.freeze(now) { example.run }
+  before do
+    freeze_time
   end
 
   it "marks as open" do
@@ -71,7 +71,7 @@ RSpec.describe OpenOrderCycleJob do
         .and change { variant.on_demand }.to(true)
         .and change { variant.on_hand }.by(0)
         .and change { variant_discontinued.on_hand }.to(0)
-        .and query_database 59
+        .and query_database 58
     end
   end
 

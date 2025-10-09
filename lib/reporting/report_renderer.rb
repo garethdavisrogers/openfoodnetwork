@@ -25,6 +25,10 @@ module Reporting
       @report.params[:report_format].in?([nil, '', 'pdf'])
     end
 
+    def display_metadata_rows?
+      @report.params[:display_metadata_rows].present? && raw_render?
+    end
+
     def display_header_row?
       @report.params[:display_header_row].present? && !raw_render?
     end
@@ -34,29 +38,20 @@ module Reporting
     end
 
     def table_headers
-      @report.table_headers || []
+      base = @report.table_headers || []
+      return base unless display_metadata_rows?
+
+      [*metadata_headers, base]
     end
 
     def table_rows
       @report.table_rows || []
     end
 
-    def report_headers
-      q = if @report.respond_to?(:ransack_params)
-        @report.ransack_params || {}
-      else
-        @report.params[:q] || {}
-      end
+    def metadata_headers
+      return [] unless display_metadata_rows?
 
-      title = @report.params[:report_type].to_s.tr('_', ' ').titleize
-      from  = q["completed_at_gt"]  || q["completed_at_gteq"]
-      to    = q["completed_at_lt"]  || q["completed_at_lteq"]
-      range = [from, to].compact.join(" → ")
-      rows = []
-      rows << ["Report Title", title]
-      rows << ["Printed At",   Time.zone.now.to_fs(:db)]
-      rows << ["Date Range",   range] unless range.empty?
-      rows
+      Reporting::ReportMetadataBuilder.new(@report, @report.try(:user)).rows
     end
 
     def as_json(_context_controller = nil)

@@ -26,8 +26,8 @@ module Admin
       show_enterprise_fees = can?(:manage_enterprise_fees,
                                   enterprise) && (is_shop || enterprise.is_primary_producer)
       show_connected_apps = can?(:manage_connected_apps, enterprise) &&
-                            feature?(:connected_apps, spree_current_user, enterprise) &&
-                            Spree::Config.connected_apps_enabled.present?
+                            (connected_apps_enabled(enterprise).present? ||
+                             dfc_platforms_available?)
       show_inventory_settings = feature?(:inventory, spree_current_user.enterprises) && is_shop
 
       show_options = {
@@ -42,9 +42,17 @@ module Admin
       build_enterprise_side_menu_items(is_shop:, show_options:)
     end
 
-    def connected_apps_enabled
+    def connected_apps_enabled(enterprise)
+      return [] unless feature?(:connected_apps, spree_current_user, enterprise)
+
       connected_apps_enabled = Spree::Config.connected_apps_enabled&.split(',') || []
       ConnectedApp::TYPES & connected_apps_enabled
+    end
+
+    def dfc_platforms_available?
+      DfcProvider::PlatformsController::PLATFORM_IDS.keys.any? do |id|
+        feature?(id, spree_current_user)
+      end
     end
 
     def enterprise_attachment_removal_modal_id
@@ -61,6 +69,11 @@ module Admin
 
     def enterprise_attachment_removal_panel_id
       "#{enterprise_attachment_removal_panel}_panel"
+    end
+
+    def enterprise_sells_options
+      scope = "admin.enterprises.admin_index.sells_options"
+      Enterprise::SELLS.map { |s| [I18n.t(s, scope:), s] }
     end
 
     private

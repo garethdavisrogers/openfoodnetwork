@@ -13,7 +13,7 @@ module Reporting
     delegate :available_headers, :table_headers, :fields_to_hide, :fields_to_show,
              to: :headers_builder
 
-    delegate :formatted_rules, :header_option?, :summary_row_option?, to: :ruler
+    delegate :formatted_rules, :header_option?, :summary_row_option?, :metadata_option?, to: :ruler
 
     def initialize(user, params = {}, render: false)
       unless render
@@ -114,11 +114,11 @@ module Reporting
     end
 
     def rows_builder
-      @rows_builder ||= ReportRowsBuilder.new(self, @user)
+      @rows_builder ||= ReportRowsBuilder.new(self)
     end
 
     def headers_builder
-      @headers_builder ||= ReportHeadersBuilder.new(self, @user)
+      @headers_builder ||= ReportHeadersBuilder.new(self)
     end
 
     def ruler
